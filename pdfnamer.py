@@ -24,16 +24,14 @@ def generate_new_name(pdf_text: str) -> str:
         {
             "role": "system",
             "content": (
-                "You are a helpful assistant that, given the content of a PDF file, "
-                "will propose a succinct yet descriptive filename for the PDF. "
-                "Return only the filename, without quotes or explanation. "
-                "Use lowercase letters, underscores between words, and end with .pdf. "
-                "Do not include spaces or special characters (other than underscores)."
+                "You are a helpful assistant that, given the content of a PDF file, will propose a short filename for the PDF. If the content includes a document name or title, use that."
+                "Return only the filename, without quotes or explanation. Use lowercase letters, words are connected with underscores. "
+                "For example: 'important_document'."
             )
         },
         {
             "role": "user",
-            "content": f"PDF content:\n{pdf_text}\n\nGenerate a short descriptive filename based on the content."
+            "content": f"Generate a short filename based on the following content.\n\n PDF content:\n{pdf_text[:300]}"
         }
     ]
 
@@ -56,6 +54,7 @@ def rename_pdfs_in_directory(directory: str):
             continue
         
         new_name = generate_new_name(pdf_text)
+        print(f"Proposed name: {new_name}")
         new_path = os.path.join(directory, new_name)
         
         # If a file with the new name already exists, skip to avoid overwriting
@@ -70,4 +69,3 @@ if __name__ == "__main__":
     import sys
     target_directory = sys.argv[1] if len(sys.argv) > 1 else '.'
     rename_pdfs_in_directory(target_directory)
-    
