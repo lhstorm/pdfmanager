@@ -11,15 +11,25 @@ PDF Namer is a Python tool that automatically renames PDF files based on their c
 - Prevents accidental file overwrites
 
 ## Installation and Usage
+
+### Clone the repository
+
 ```bash
-# Clone the repository
+
 git clone https://github.com/yourusername/pdfnamer.git
 cd pdfnamer
-# Create a virtual environment and install dependencies
+```
+
+### Create a virtual environment and install dependencies
+```bash
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
-# Run the script
+```
+
+### Run the script
+
+```bash
 python3 pdfnamer.py
 ```
 
